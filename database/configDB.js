@@ -1,27 +1,35 @@
+import pg from 'pg';
 
-const config = {
-    user: 'postgres',
-    host: 'roundhouse.proxy.rlwy.net',
-    database: 'railway',
-    password: 'YvfghGfiHoLZeAPqGYfaWkpAJZedlVGk',
-    port: 56888
-}
+const { Pool } = pg
 
-async function testarConexao() {
+let pool;
+
+export default async function connect() {
+    if (global.connection) {
+        return global.connection;
+    }
+
+    const config = {
+        user: process.env.DB_USER,
+        host: process.env.DB_HOST,
+        database: process.env.DB_DATABASE,
+        password: process.env.DB_PASSWORD,
+        port: process.env.DB_PORT
+        };
+
+    pool = new Pool(config);
+
     try {
-        // Conecta ao PostgreSQL
-        await client.connect();
-        const res = await client.query('SELECT * FROM provas')
-        console.log(res.rows);
-    } catch (err) {
-        console.error('Erro ao conectar ao PostgreSQL:', err);
-    } finally {
-        // Fecha a conexão com PostgreSQL, se estiver aberta
-        await client.end();
+        // Testa a conexão inicial
+        const client = await pool.connect();
+        console.log("Conexão com o PostgreSQL estabelecida!");
+        client.release();  // Libera o cliente de volta ao pool
+
+        // Guarda o pool de conexões na variável global
+        global.connection = pool;
+        return pool;
+    } catch (error) {
+        console.error("Erro ao conectar ao PostgreSQL:", error);
+        throw error;
     }
 }
-
-// Chama a função para testar a conexão
-//testarConexao();
-
-export default config

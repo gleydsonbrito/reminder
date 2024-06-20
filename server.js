@@ -1,13 +1,7 @@
-import { createServer } from 'http';
-import client from './bd/configDB.js';
+import app from './app.js'
 
-createServer((req, res) => {
-  res.write('Hello World!');
+const port = 3000
 
-  client.connect( err => {
-    if(err) throw Error('Não concetado...')
-    console.log('Conecatado od oa dsgvasgsd ')
-  })
-
-  res.end();
-}).listen(process.env.PORT);
+app.listen(port, () => {
+  console.log(`Listening port ${port}`)
+})
