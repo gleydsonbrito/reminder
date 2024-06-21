@@ -1,4 +1,4 @@
-import app from './app.js'
+import app from './index.js'
 
 const port = 3000
 
