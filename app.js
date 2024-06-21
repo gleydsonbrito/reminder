@@ -1,11 +1,7 @@
-import express from 'express'
-import bodyParser from 'body-parser'
-import useRoutes from './routes/provaRouter.js'
+import app from './app.js'
 
-const app = express()
-app.set('port', process.env.PORT || 3000)
-app.use(express.urlencoded({ extended: true }))
-app.use(bodyParser.json())
-app.use(useRoutes)
+const port = 3000
 
-export default app
+app.listen(port, () => {
+  console.log(`Listening port ${port}`)
+})
