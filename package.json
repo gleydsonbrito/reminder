@@ -6,7 +6,7 @@
   "type": "module",
   "license": "MIT",
   "scripts": {
-    "start": "npm install --omit=dev && npm run start"
+    "start": "node server.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
