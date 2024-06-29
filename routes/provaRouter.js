@@ -93,7 +93,7 @@ router.delete('/apagarProva/:id', async (req, res) => {
     const result = await client.query(query, [id])
     
     if(result) {
-      res.status(200).send(result)
+      res.status(200).send(`Registro deletado com sucesso: ${result.rowCount}`)
     } else {
       return {msg: "Nenhuma prova econtrada"}
     }

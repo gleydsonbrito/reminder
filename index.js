@@ -5,9 +5,13 @@ import useRoutes from './routes/provaRouter.js'
 
 const app = express()
 app.set('port', process.env.PORT || 3000)
-app.use(cors())
-app.use(express.urlencoded({ extended: true }))
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'DELETE', 'PATCH' ],
+  allowedHeaders: ['Content-Type'] // Permite apenas Content-Type no header
+}))
 app.use(bodyParser.json())
+app.use(express.urlencoded({ extended: true }))
 app.use(useRoutes)
 
 export default app
