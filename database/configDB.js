@@ -15,19 +15,17 @@ export default async function connect() {
         database: process.env.DB_DATABASE,
         password: process.env.DB_PASSWORD,
         port: process.env.DB_PORT
-        };
+    };
 
     pool = new Pool(config);
 
     try {
-        // Testa a conexão inicial
         const client = await pool.connect();
-        console.log("Conexão com o PostgreSQL estabelecida!");
         client.release();  // Libera o cliente de volta ao pool
-
-        // Guarda o pool de conexões na variável global
         global.connection = pool;
+       
         return pool;
+    
     } catch (error) {
         console.error("Erro ao conectar ao PostgreSQL:", error);
         throw error;

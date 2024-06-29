@@ -87,6 +87,7 @@ async function deleteProvaByID(id) {
     await client.connect()
     const query = `DELETE FROM provas where id = $1 RETURNING *;`
     const result = await client.query(query, [id])
+    
     if(result.rowCount > 0) {
       return {msg: `Prova deletada com sucesso: ${id}`}
     } else {

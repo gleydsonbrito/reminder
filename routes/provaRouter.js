@@ -92,7 +92,7 @@ router.delete('/apagarProva/:id', async (req, res) => {
     const query = `DELETE FROM provas where id = $1;`
     const result = await client.query(query, [id])
     
-    if(result.rowCount > 0) {
+    if(result) {
       res.status(200).send(result.rowCount)
     } else {
       return {msg: "Nenhuma prova econtrada"}
