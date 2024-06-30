@@ -4,14 +4,15 @@ import connect from '../database/configDB.js'
 
 router.post('/adicionarProva', async (req, res) => {
   const prova = req.body
+  console.log(prova)
   let values = []
   for(const key in prova) {
     values.push(prova[key])
   }
   try {
     const client = await connect();
-    const query = `INSERT INTO provas (orgao, banca, dt_inscricao, dt_pgto, dt_prova, f_inscrito, f_pago, valor, f_realizada)
-      VALUES ($1 ,$2, $3, $4, $5, $6, $7, $8, $9);`
+    const query = `INSERT INTO provas (orgao, banca, dt_inscricao, dt_pgto, dt_prova, f_inscrito, f_pago, valor, f_realizada, candidato)
+      VALUES ($1 ,$2, $3, $4, $5, $6, $7, $8, $9, $10);`
     const result = await client.query(query, values)
     res.status(200).send(`Registro adicionado com sucesso: ${result.rowCount}`)
   
