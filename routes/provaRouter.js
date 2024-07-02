@@ -16,7 +16,7 @@ router.post('/adicionarProva', async (req, res) => {
       VALUES ($1 ,$2, $3, $4, $5, $6, $7, $8, $9, $10);`
     
     const result = await client.query(query, values)
-    res.status(200).send(`Registro adicionado com sucesso: ${result.rowCount}`)
+    res.status(200).send({msg: `Registro adicionado com sucesso: ${result.rowCount}`})
   
   } catch (err){
     console.log('Não foi possível inserir os dados', err)
