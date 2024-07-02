@@ -8,7 +8,7 @@ router.post('/adicionarProva', async (req, res) => {
   for(const key in prova) {
     values.push(prova[key])
   }
-  console.log('PROVA: ***', req)
+  console.log('PROVA: ***', req.body)
   console.log('LISTA: ***', values)
   try {
     const client = await connect();
