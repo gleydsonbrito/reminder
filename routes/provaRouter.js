@@ -8,12 +8,13 @@ router.post('/adicionarProva', async (req, res) => {
   for(const key in prova) {
     values.push(prova[key])
   }
-  console.log('PROVA: ***', prova)
+  console.log('PROVA: ***', req)
   console.log('LISTA: ***', values)
   try {
     const client = await connect();
     const query = `INSERT INTO provas (orgao, banca, dt_inscricao, dt_pgto, dt_prova, f_inscrito, f_pago, valor, f_realizada, candidato)
       VALUES ($1 ,$2, $3, $4, $5, $6, $7, $8, $9, $10);`
+    
     const result = await client.query(query, values)
     res.status(200).send(`Registro adicionado com sucesso: ${result.rowCount}`)
   
