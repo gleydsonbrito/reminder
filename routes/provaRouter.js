@@ -8,8 +8,6 @@ router.post('/adicionarProva', async (req, res) => {
   for(const key in prova) {
     values.push(prova[key])
   }
-  console.log('PROVA: ***', req.body)
-  console.log('LISTA: ***', values)
   try {
     const client = await connect();
     const query = `INSERT INTO provas (orgao, banca, dt_inscricao, dt_pgto, dt_prova, f_inscrito, f_pago, valor, f_realizada, candidato)
