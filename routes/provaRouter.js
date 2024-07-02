@@ -3,12 +3,12 @@ const router = express.Router()
 import connect from '../database/configDB.js'
 
 router.post('/adicionarProva', async (req, res) => {
-  const prova = req.body
+  const { prova } = req.body
   let values = []
   for(const key in prova) {
     values.push(prova[key])
   }
-  console.log(values)
+  console.log('PROVAS: ***', values)
   try {
     const client = await connect();
     const query = `INSERT INTO provas (orgao, banca, dt_inscricao, dt_pgto, dt_prova, f_inscrito, f_pago, valor, f_realizada, candidato)
